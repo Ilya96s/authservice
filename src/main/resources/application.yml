@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: "auth-service"
+
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://${SPRING_DATASOURCE_URL}
+      username: ${SPRING_DATASOURCE_USERNAME}
+      password: ${SPRING_DATASOURCE_PASSWORD}
+
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://127.0.0.1:5432/postgres
+#    username: postgres
+#    password: postgres
+
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8081
+
+auth:
+  jwt:
+    secret: 60ef0c108e3d884071fb4a3eadeb5d936f0a694bb98812d655a4062b771c6cb6

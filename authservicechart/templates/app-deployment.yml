@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-spring-auth-app-deployment
+spec:
+  replicas: {{ .Values.ReplicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-spring-auth-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-spring-auth-app
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-spring-auth-app-container
+          image: {{ .Values.authServiceApp.image.repository }}:{{ .Values.authServiceApp.image.tag }}
+          imagePullPolicy: {{ .Values.authServiceApp.image.pullPolicy }}
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql-service:5432/{{ .Values.postgresql.databaseName }}
+            - name: SPRING_DATASOURCE_USERNAME
+              value: {{ .Values.postgresql.username }}
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: {{ .Values.postgresql.password }}

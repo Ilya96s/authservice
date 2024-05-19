@@ -1,0 +1,12 @@
+replicaCount: 1
+
+postgresql:
+  databaseName: postgres
+  password: password
+  username: postgres
+
+authServiceApp:
+  image:
+    repository: iskaltygin/auth1
+    pullPolicy: IfNotPresent
+    tag: latest
